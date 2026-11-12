@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Friday Paycheck System</title>
-<style>body{font:17px/1.6 system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 20px;color:#111}h1{font-size:34px;line-height:1.15;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}.cta{display:inline-block;background:#4f46e5;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700}.price{font-size:28px;font-weight:800}.muted{color:#475569;font-size:14px}ul{padding-left:22px}li{margin:6px 0}</style></head><body>
+<style>body{font:17px/1.6 system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 20px;color:#111}h1{font-size:34px;line-height:1.15;margin:0 0 10px}h2{font-size:20px;margin:30px 0 8px}.price{font-size:28px;font-weight:800}.muted{color:#475569;font-size:14px}ul{padding-left:22px}li{margin:6px 0}.cta-wrap{margin:18px 0 6px}
+.cta{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 24px;border-radius:14px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;text-decoration:none;font-weight:700;font-size:18px;box-shadow:0 6px 18px rgba(79,70,229,.35);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cta-price{background:rgba(255,255,255,.2);padding:4px 10px;border-radius:999px;font-size:15px}
+.cta-arrow{transition:transform .18s ease}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(79,70,229,.45);filter:brightness(1.05)}
+.cta:hover .cta-arrow{transform:translateX(4px)}
+.cta:active{transform:translateY(0) scale(.98);box-shadow:0 3px 10px rgba(79,70,229,.35)}
+.cta:focus-visible{outline:3px solid #111;outline-offset:3px}
+.cta-note{margin:10px 0 0;font-size:15px;color:#334155;min-height:22px}
+.trust{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:#475569}
+.trust li::before{content:"\2713";color:#16a34a;font-weight:700;margin-right:6px}
+@media (max-width:480px){.cta{width:100%;justify-content:center}}
+@media (prefers-reduced-motion:reduce){.cta,.cta-arrow{transition:none}.cta:hover,.cta:active{transform:none}.cta:hover .cta-arrow{transform:none}}
+</style></head><body>
 <h1>Your clients pay when they feel like it. You still pay rent on the 1st.</h1>
 <p>The Friday Paycheck System for US 1099 consultants: 3 bank accounts, one tax number you compute yourself, and 4 emails that chase late invoices for you. About 40 minutes to set up.</p>
 <h2>The problem</h2>
@@ -9,8 +22,25 @@
 <h2>Founding offer</h2>
 <p><span class="price">$197</span> <span class="muted">(regular price $497)</span></p>
 <p>14-day money-back guarantee. No calls, no support meetings. Instant download after checkout. Checkout is handled by Polar, which acts as the seller of record and collects sales tax and VAT where required.</p>
-<p><span class="cta">Checkout opens soon. Sold through Polar.</span></p>
+<div class="cta-wrap">
+<a id="cta" class="cta" href="#get" data-checkout="" role="button">
+<span class="cta-label">Get the system</span>
+<span class="cta-price">$197</span>
+<svg class="cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</a>
+<p id="cta-note" class="cta-note" role="status" aria-live="polite"></p>
+<ul class="trust"><li>14-day refund</li><li>Instant download</li><li>No calls needed</li></ul>
+</div>
 <h2>Honest note</h2>
 <p>This is a new product. There are no buyer results to show yet, which is why the price is low and the refund is open. Every formula has a worked example you can check, and the sources are listed in the book.</p>
 <p class="muted">Educational material, not tax, legal or financial advice. US federal figures from IRS.gov, checked November 2026.</p>
+<script>
+(function(){
+var cta=document.getElementById('cta'),note=document.getElementById('cta-note');
+var url=cta.getAttribute('data-checkout');
+if(url){cta.href=url;cta.removeAttribute('role');}
+else{cta.addEventListener('click',function(e){e.preventDefault();note.textContent='Checkout opens soon. It is sold through Polar. Check back shortly.';});
+cta.addEventListener('keydown',function(e){if(e.key===' '){e.preventDefault();cta.click();}});}
+})();
+</script>
 </body></html>
